@@ -1,4 +1,4 @@
-package com.devrito.tasks.domain.mappers;
+package com.devrito.tasks.mappers;
 
 import com.devrito.tasks.domain.dto.TaskListDto;
 import com.devrito.tasks.domain.entities.TaskList;

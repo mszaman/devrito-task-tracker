@@ -1,4 +1,4 @@
-package com.devrito.tasks.domain.mappers.impl;
+package com.devrito.tasks.mappers.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,8 +9,8 @@ import com.devrito.tasks.domain.dto.TaskListDto;
 import com.devrito.tasks.domain.entities.Task;
 import com.devrito.tasks.domain.entities.TaskList;
 import com.devrito.tasks.domain.entities.TaskStatus;
-import com.devrito.tasks.domain.mappers.TaskListMapper;
-import com.devrito.tasks.domain.mappers.TaskMapper;
+import com.devrito.tasks.mappers.TaskListMapper;
+import com.devrito.tasks.mappers.TaskMapper;
 
 @Component
 public class TaskListMapperImpl implements TaskListMapper {

@@ -1,10 +1,10 @@
-package com.devrito.tasks.domain.mappers.impl;
+package com.devrito.tasks.mappers.impl;
 
 import org.springframework.stereotype.Component;
 
 import com.devrito.tasks.domain.dto.TaskDto;
 import com.devrito.tasks.domain.entities.Task;
-import com.devrito.tasks.domain.mappers.TaskMapper;
+import com.devrito.tasks.mappers.TaskMapper;
 
 @Component
 public class TaskMapperImpl implements TaskMapper {
