@@ -2,6 +2,8 @@ package com.devrito.tasks.services.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -38,6 +40,11 @@ public class TaskListServiceImpl implements TaskListService {
 
 		return taskListRepository.save(
 				new TaskList(null, taskList.getTitle(), taskList.getDescription(), null, now, now));
+	}
+
+	@Override
+	public Optional<TaskList> getTaskList(UUID id) {
+		return taskListRepository.findById(id);
 	}
 
 }
