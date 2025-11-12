@@ -9,6 +9,8 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.devrito.tasks.domain.entities.TaskList;
+import com.devrito.tasks.exceptions.ResourceNotFoundException;
+import com.devrito.tasks.exceptions.ValidationException;
 import com.devrito.tasks.repositories.TaskListRepository;
 import com.devrito.tasks.services.TaskListService;
 
@@ -23,7 +25,13 @@ public class TaskListServiceImpl implements TaskListService {
 
 	@Override
 	public List<TaskList> listTaskLists() {
-		return taskListRepository.findAll();
+		List<TaskList> taskLists = taskListRepository.findAll();
+
+		// if (taskLists.isEmpty()) {
+		// throw new ResourceNotFoundException("Task lists not found.");
+		// }
+
+		return taskLists;
 	}
 
 	@Override
@@ -34,7 +42,7 @@ public class TaskListServiceImpl implements TaskListService {
 		}
 
 		if (null == taskList.getTitle() || taskList.getTitle().isBlank()) {
-			throw new IllegalArgumentException("Task list must has a title.");
+			throw new ValidationException("Task list must has a title.");
 		}
 
 		LocalDateTime now = LocalDateTime.now();
@@ -45,7 +53,13 @@ public class TaskListServiceImpl implements TaskListService {
 
 	@Override
 	public Optional<TaskList> getTaskList(UUID id) {
-		return taskListRepository.findById(id);
+		Optional<TaskList> taskList = taskListRepository.findById(id);
+
+		if (taskList.isEmpty()) {
+			throw new ResourceNotFoundException("Task list not found.");
+		}
+
+		return taskList;
 	}
 
 	@Override
@@ -57,10 +71,11 @@ public class TaskListServiceImpl implements TaskListService {
 
 		if (!Objects.equals(taskListId, taskList.getId())) {
 			throw new IllegalArgumentException("Attempting to change task list ID. This is not permitted.");
+
 		}
 
 		TaskList existingTaskList = taskListRepository.findById(taskListId)
-				.orElseThrow(() -> new IllegalArgumentException("Task list not found"));
+				.orElseThrow(() -> new ResourceNotFoundException("Task list not found"));
 
 		existingTaskList.setTitle(taskList.getTitle());
 		existingTaskList.setDescription(taskList.getDescription());
