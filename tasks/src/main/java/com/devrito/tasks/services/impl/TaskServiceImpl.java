@@ -53,7 +53,7 @@ public class TaskServiceImpl implements TaskService {
 		TaskList taskList = taskListRepository.findById(taskListId)
 				.orElseThrow(() -> new ResourceNotFoundException("Task list not found."));
 
-		Task taskToSave = new Task(null, task.getTitle(), task.getDescription(), now, taskStatus,
+		Task taskToSave = new Task(null, task.getTitle(), task.getDescription(), task.getDueDate(), taskStatus,
 				taskPriority, taskList, now, now);
 
 		return taskRepository.save(taskToSave);
