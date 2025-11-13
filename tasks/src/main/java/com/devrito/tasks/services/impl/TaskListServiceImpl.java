@@ -14,6 +14,8 @@ import com.devrito.tasks.exceptions.ValidationException;
 import com.devrito.tasks.repositories.TaskListRepository;
 import com.devrito.tasks.services.TaskListService;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class TaskListServiceImpl implements TaskListService {
 
@@ -62,6 +64,7 @@ public class TaskListServiceImpl implements TaskListService {
 		return taskList;
 	}
 
+	@Transactional
 	@Override
 	public TaskList updateTaskList(UUID taskListId, TaskList taskList) {
 
