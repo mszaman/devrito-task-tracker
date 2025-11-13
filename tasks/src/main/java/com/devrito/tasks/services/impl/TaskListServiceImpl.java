@@ -86,6 +86,11 @@ public class TaskListServiceImpl implements TaskListService {
 
 	@Override
 	public void deleteTaskList(UUID taskListId) {
+		Optional<TaskList> taskListToDelete = taskListRepository.findById(taskListId);
+
+		if (taskListToDelete.isEmpty()) {
+			throw new ResourceNotFoundException("Task list not found.");
+		}
 
 		taskListRepository.deleteById(taskListId);
 	}
