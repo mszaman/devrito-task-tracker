@@ -1,13 +1,16 @@
 package com.devrito.tasks.controllers;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,5 +50,39 @@ public class TaskController {
 		return new ResponseEntity<TaskDto>(
 				taskMapper.toDto(createdTask),
 				HttpStatus.CREATED);
+	}
+
+	@GetMapping(path = "/{task_id}")
+	public ResponseEntity<Optional<TaskDto>> getTask(
+			@PathVariable("task_list_id") UUID taskListId,
+			@PathVariable("task_id") UUID taskId) {
+
+		Optional<TaskDto> taskDto = taskService.getTask(taskListId, taskId).map(taskMapper::toDto);
+
+		return new ResponseEntity<>(taskDto, HttpStatus.OK);
+	}
+
+	@PutMapping(path = "/{task_id}")
+	public ResponseEntity<Void> updateTask(
+			@PathVariable("task_list_id") UUID taskListId,
+			@PathVariable("task_id") UUID taskId,
+			@RequestBody TaskDto taskDto) {
+
+		taskService.updateTask(
+				taskListId,
+				taskId,
+				taskMapper.fromDto(taskDto));
+
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
+	@DeleteMapping(path = "/{task_id}")
+	public ResponseEntity<Void> deleteTask(
+			@PathVariable("task_list_id") UUID taskListId,
+			@PathVariable("task_id") UUID taskId) {
+
+		taskService.deleteTask(taskListId, taskId);
+
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }

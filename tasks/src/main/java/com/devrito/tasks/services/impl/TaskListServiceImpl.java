@@ -71,7 +71,6 @@ public class TaskListServiceImpl implements TaskListService {
 
 		if (!Objects.equals(taskListId, taskList.getId())) {
 			throw new IllegalArgumentException("Attempting to change task list ID. This is not permitted.");
-
 		}
 
 		TaskList existingTaskList = taskListRepository.findById(taskListId)
