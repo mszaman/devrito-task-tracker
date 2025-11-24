@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    environment:
+      # Set the password for the default 'postgres' user
+      POSTGRES_PASSWORD: changemeinprod!
+      # Create a custom database on startup
+      POSTGRES_DB: devrito-task-tracker
+      # Optionally, set the user/owner for the custom database (default is 'postgres')
+      POSTGRES_USER: zaman
+    volumes:
+      - postgres_data:/var/lib/postgresql
+
+volumes:
+  postgres_data:

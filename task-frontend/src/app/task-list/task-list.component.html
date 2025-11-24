@@ -1,0 +1,47 @@
+<div class="bg-gray-800 w-1/2 mx-auto mt-10 p-6 rounded-lg">
+  <p class="text-center text-2xl font-semibold">Task List</p>
+  <div class="flex flex-row-reverse my-4 px-4">
+    <button
+      type="submit"
+      *ngIf="isShowAddTaskListButton"
+      (click)="onClickAddTaskList()"
+      class="bg-amber-800 px-4 py-1 w-fit rounded hover:bg-amber-700"
+    >
+      Add Task List
+    </button>
+  </div>
+  <app-task-list-form
+    *ngIf="isAddTaskListFormOpen"
+    (isAddTaskListFormOpen)="closeAddTaskListForm($event)"
+    (emitTaskListFormData)="getSubmittedFormData($event)"
+  ></app-task-list-form>
+
+  <div class="flex gap-4 mt-10">
+    <div
+      *ngFor="let taskList of taskLists"
+      class="bg-gray-600 p-4 w-1/3 rounded-lg"
+    >
+      <div class="flex flex-col gap-2 justify-between">
+        <div class="flex flex-col">
+          <p class="text-xs font-bold">Title</p>
+          <p class="text-white">{{ taskList.title }}</p>
+        </div>
+        <div class="flex flex-col">
+          <p class="text-xs font-bold">Total Task</p>
+          <p class="text-white">{{ taskList.count }}</p>
+        </div>
+        <div class="flex gap-2 mt-2">
+          <button class="bg-sky-800 px-1 rounded text-xs font-semibold">
+            Details
+          </button>
+          <button class="bg-yellow-700 px-1 rounded text-xs font-semibold">
+            Edit
+          </button>
+          <button class="bg-red-900 px-1 rounded text-xs font-semibold">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
