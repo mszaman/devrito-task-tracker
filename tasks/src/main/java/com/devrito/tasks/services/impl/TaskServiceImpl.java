@@ -2,10 +2,7 @@ package com.devrito.tasks.services.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
-<<<<<<< HEAD
-=======
 import java.util.Objects;
->>>>>>> refs/remotes/origin/main
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,11 +18,8 @@ import com.devrito.tasks.repositories.TaskListRepository;
 import com.devrito.tasks.repositories.TaskRepository;
 import com.devrito.tasks.services.TaskService;
 
-<<<<<<< HEAD
-=======
 import jakarta.transaction.Transactional;
 
->>>>>>> refs/remotes/origin/main
 @Service
 public class TaskServiceImpl implements TaskService {
 
@@ -43,10 +37,7 @@ public class TaskServiceImpl implements TaskService {
 		return taskRepository.findByTaskListId(taskListId);
 	}
 
-<<<<<<< HEAD
-=======
 	@Transactional
->>>>>>> refs/remotes/origin/main
 	@Override
 	public Task createTask(UUID taskListId, Task task) {
 		if (null != task.getId()) {
@@ -66,18 +57,12 @@ public class TaskServiceImpl implements TaskService {
 		TaskList taskList = taskListRepository.findById(taskListId)
 				.orElseThrow(() -> new ResourceNotFoundException("Task list not found."));
 
-<<<<<<< HEAD
-		Task taskToSave = new Task(null, task.getTitle(), task.getDescription(), now, taskStatus,
-=======
 		Task taskToSave = new Task(null, task.getTitle(), task.getDescription(), task.getDueDate(), taskStatus,
->>>>>>> refs/remotes/origin/main
 				taskPriority, taskList, now, now);
 
 		return taskRepository.save(taskToSave);
 	}
 
-<<<<<<< HEAD
-=======
 	@Transactional
 	@Override
 	public Optional<Task> getTask(UUID taskListId, UUID taskId) {
@@ -154,5 +139,4 @@ public class TaskServiceImpl implements TaskService {
 		taskRepository.deleteByTaskListIdAndId(taskListId, taskId);
 	}
 
->>>>>>> refs/remotes/origin/main
 }
