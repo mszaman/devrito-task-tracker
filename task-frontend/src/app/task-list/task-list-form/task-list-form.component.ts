@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { TaskList } from 'src/app/Models/TaskList';
+import { TaskList } from 'src/app/services/api/models/TaskList';
 
 @Component({
   selector: 'app-task-list-form',

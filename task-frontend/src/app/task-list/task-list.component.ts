@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskList } from '../Models/TaskList';
+import { TaskList } from '../services/api/models/TaskList';
 import { TaskListService } from '../services/api/tasks/task-list.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { TaskListService } from '../services/api/tasks/task-list.service';
   styleUrls: ['./task-list.component.css'],
 })
 export class TaskListComponent implements OnInit {
-  taskLists: any;
+  public taskLists: any;
 
   isAddTaskListFormOpen: boolean = false;
 
@@ -35,7 +35,12 @@ export class TaskListComponent implements OnInit {
     this.isShowAddTaskListButton = true;
   }
 
-  getSubmittedFormData(taskListData: TaskList) {
-    console.log(taskListData);
+  onFormSubmission(taskListData: any) {
+    // console.log(taskListData);
+    this.service.createTaskList(taskListData).subscribe({
+      next: (result) => {
+        console.log(result);
+      },
+    });
   }
 }

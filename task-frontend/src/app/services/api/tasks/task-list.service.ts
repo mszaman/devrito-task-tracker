@@ -6,13 +6,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class TaskListService {
-  private baseUrl: string = 'http://localhost:8080/api';
+  private baseUrl: string = 'http://localhost:8080/api/task-lists';
 
   constructor(private http: HttpClient) {}
 
   getAllTaskLists(): Observable<Object> {
-    const taskListsUrl = `${this.baseUrl}/task-lists`;
+    return this.http.get(this.baseUrl);
+  }
 
-    return this.http.get(taskListsUrl);
+  createTaskList(taskListData: any): Observable<Object> {
+    return this.http.post(this.baseUrl, taskListData);
   }
 }
