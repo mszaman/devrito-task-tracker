@@ -4,6 +4,14 @@
   (ngSubmit)="onSubmit(taskListForm)"
   class="bg-gray-700 px-4 py-3 mt-4 rounded-lg flex flex-col gap-3"
 >
+  <input
+    type="text"
+    id="id"
+    #idInput
+    name="id"
+    ngModel
+    hidden
+  />
   <div class="flex flex-col gap-1">
     <label for="title" class="text-sm font-semibold">Title</label>
     <input

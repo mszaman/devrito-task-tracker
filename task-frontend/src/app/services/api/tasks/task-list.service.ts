@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { TaskListDto } from '../dto/task-list-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -10,11 +11,27 @@ export class TaskListService {
 
   constructor(private http: HttpClient) {}
 
-  getAllTaskLists(): Observable<Object> {
-    return this.http.get(this.baseUrl);
+  getAllTaskLists(): Observable<TaskListDto> {
+    return this.http.get<TaskListDto>(this.baseUrl);
   }
 
-  createTaskList(taskListData: any): Observable<Object> {
-    return this.http.post(this.baseUrl, taskListData);
+  createTaskList(taskListData: any): Observable<HttpResponse<any>> {
+    return this.http.post<any>(this.baseUrl, taskListData, {
+      observe: 'response'
+    });
+  }
+
+  updateTaskList(id: string, taskListDataToUpdate: any): Observable<HttpResponse<any>> {
+    const taskListToUpdate = `${this.baseUrl}/${id}`;
+    return this.http.put<HttpResponse<any>>(taskListToUpdate, taskListDataToUpdate, {
+      observe: 'response'
+    });
+  }
+
+  deleteTaskList(id: string) : Observable<HttpResponse<any>> {
+    const taskListToDelete = `${this.baseUrl}/${id}`;
+    return this.http.delete<any>(taskListToDelete, {
+      observe: 'response'
+    });
   }
 }

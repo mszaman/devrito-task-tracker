@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -16,6 +17,9 @@ import { TaskList } from 'src/app/services/api/models/TaskList';
 export class TaskListFormComponent {
   @ViewChild('titleInput')
   titleInput!: ElementRef;
+
+  @Input()
+  id: string = "";
 
   @Output()
   isAddTaskListFormOpen: EventEmitter<boolean> = new EventEmitter<boolean>();
